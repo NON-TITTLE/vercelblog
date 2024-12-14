@@ -32,3 +32,6 @@ posts.forEach(post => {
   // Añadir el elemento al contenedor
   blogContainer.appendChild(postElement);
 });
+"scripts": {
+  "build": "next build"
+}
