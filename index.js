@@ -1,45 +1,35 @@
 console.log('Happy developing ✨');
 // Array de publicaciones del blog
-const posts = [
-    {
-        title: 'Primer Post',
-        content: '¡Bienvenido a mi blog minimalista! Aquí encontrarás contenido simple y relevante.'
-    },
-    {
-        title: '¿Por qué un blog minimalista?',
-        content: 'Los diseños minimalistas son limpios, rápidos y fáciles de usar. ¡Perfectos para compartir ideas!'
-    },
-    {
-        title: 'Mantén las cosas simples',
-        content: 'La clave del éxito en la escritura es mantener las cosas claras, simples y al grano.'
-    }
-];
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
 
-// Seleccionamos el contenedor principal
-const blogContainer = document.getElementById('blog-container');
+const obsidianNotePath = '/ruta/a/tu/nota';
+const jekyllPostPath = '/ruta/a/tu/blog/_posts';
+const repoPath = '/ruta/del/repositorio';
 
-// Renderizamos las publicaciones dinámicamente
-posts.forEach(post => {
-    // Crear el elemento
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
+// Leemos la nota de Obsidian
+const noteContent = fs.readFileSync(path.join(obsidianNotePath));
 
-    // Establecer el contenido
-    postElement.innerHTML = `
-    <h2>${post.title}</h2>
-    <p>${post.content}</p>
-  `;
+// Añadimos el front matter al comienzo
+const newPostContent = `---
+layout: post
+title:  "My post"
+date:   ${new Date().toISOString()}
+categories: blog
+---
+${noteContent}`;
 
-    // Añadir el elemento al contenedor
-    blogContainer.appendChild(postElement);
-});
-"scripts": {
-    "build": "next build"
-}
-export default function Home() {
-    return (
-        <div>
-            <h1>¡Hola, Next.js!</h1>
-        </div>
-    );
-}
+// Creamos el nombre del nuevo archivo basado en la fecha y el título del post
+const fileName = `${new Date().toISOString().slice(0, 10)}-mi-post.md`;
+
+// Creamos la nueva publicación en la carpeta de publicaciones de Jekyll
+fs.writeFileSync(path.join(jekyllPostPath, fileName), newPostContent);
+
+// Entra al repositorio
+process.chdir(repoPath);
+
+// Hacemos commit y push
+execSync('git add .');
+execSync('git commit -m "Add new blog post"');
+execSync('git push');
