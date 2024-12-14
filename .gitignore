@@ -1,0 +1,16 @@
+# Archivos del sistema
+.DS_Store
+.Trash/
+.env
+
+# Node.js
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Configuración personal
+.zshrc
+.bash_history1;
+
