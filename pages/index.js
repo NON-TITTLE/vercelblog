@@ -6,16 +6,3 @@ export default function Home() {
         </div>
     );
 }
-import { VercelToolbar } from '@vercel/toolbar/next';
-import { useIsEmployee } from 'lib/auth'; // Your auth library
-
-export default function MyApp({ Component, pageProps }) {
-    const isEmployee = useIsEmployee();
-
-    return (
-        <>
-            <Component {...pageProps} />
-            {isEmployee ? <VercelToolbar /> : null}
-        </>
-    );
-}
