@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                  // Define la versión de JavaScript a generar
+    "lib": ["dom", "dom.iterable", "esnext"], // Define bibliotecas estándar compatibles
+    "allowJs": true,                    // Permite archivos .js además de .ts
+    "skipLibCheck": true,               // Omite la verificación de tipos en dependencias
+    "strict": true,                     // Habilita el modo estricto
+    "forceConsistentCasingInFileNames": true, // Consistencia en nombres de archivo
+    "noEmit": true,                     // No genera archivos .js al compilar
+    "incremental": true,                // Mejora la velocidad en compilaciones incrementales
+    "esModuleInterop": true,            // Soporte para importar módulos CommonJS
+    "module": "esnext",                 // Usa módulos ES
+    "moduleResolution": "node",         // Resolución de módulos estilo Node.js
+    "resolveJsonModule": true,          // Permite importar archivos .json
+    "isolatedModules": true,            // Asegura que cada archivo actúe como un módulo independiente
+    "jsx": "preserve"                   // Mantiene el JSX para Next.js
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"], // Archivos incluidos
+  "exclude": ["node_modules"]          // Archivos/directorios excluidos
+}
